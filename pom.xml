@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>railo.jelastic</groupId>
+	<artifactId>railo.jelastic</artifactId>
+	<packaging>war</packaging>
+	<version>0.1.3</version>
+	<name>Railo Jelastic</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.getrailo</groupId>
+			<artifactId>railo</artifactId>
+			<version>4.1.0.011</version>
+		</dependency>
+	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>cfmlprojects</id>
+			<url>http://cfmlproject.org/artifacts/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<warSourceDirectory>jelastic</warSourceDirectory>
+					<!-- <webXml>heroku/WEB-INF/web.xml</webXml>  -->
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>src</directory>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
+		<!-- use this if you don't want to build in the cloud and instead deploy a war... jelastic:deploy -->
+			<plugin>
+				<groupId>com.jelastic</groupId>
+				<artifactId>jelastic-maven-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<email>${jelastic.user}</email>
+					<password>${jelastic.password}</password>
+					<context>ROOT</context>
+					<environment>railoshen</environment>
+					<api_hoster>${jelastic.apihoster}</api_hoster>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>sonatype-oss-public</id>
+			<url>https://oss.sonatype.org/content/groups/public</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+</project>
