@@ -19,7 +19,7 @@
 	<repositories>
 		<repository>
 			<id>cfmlprojects</id>
-			<url>http://cfmlproject.org/artifacts/</url>
+			<url>http://cfmlprojects.org/artifacts/</url>
 			<releases>
 				<enabled>true</enabled>
 			</releases>
